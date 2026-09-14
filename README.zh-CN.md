@@ -25,7 +25,7 @@ OpenSDLC 是一个纯指令型 Agent Skill。它使用项目已有工具，连�
 
 ### 安装 Skill
 
-将完整 `opensdlc/` 目录复制到 Agent 的项目级 Skill 目录，保留 `SKILL.md`、参考文件和
+将完整 `src/` 目录复制到 Agent 的项目级 Skill 目录，保留 `SKILL.md`、参考文件和
 两套模板的相对位置。不需要安装运行时、生成器、后台服务或新项目依赖。
 
 也可以使用 [skills.sh](https://skills.sh) CLI，将它直接安装到自动检测到的 Agent Skill 目录：
@@ -39,12 +39,12 @@ npx skills add https://github.com/zhengui666/OpenSDLC --skill opensdlc
 | [Claude Code](https://code.claude.com/docs/en/skills) | `.claude/skills/opensdlc/` | `/opensdlc` |
 | [Codex](https://developers.openai.com/codex/skills/) | `.agents/skills/opensdlc/` | `$opensdlc` |
 
-**首次安装** Claude Code Skill 时，在解压后包含 `opensdlc/` 的目录执行：
+**首次安装** Claude Code Skill 时，在仓库根目录（包含 `src/`）执行：
 
 ```sh
 PROJECT="/absolute/path/to/your-project"
 mkdir -p "$PROJECT/.claude/skills"
-cp -R opensdlc "$PROJECT/.claude/skills/"
+cp -R src "$PROJECT/.claude/skills/opensdlc"
 ```
 
 Codex 改用 `$PROJECT/.agents/skills/`。目标已存在时，先检查并保留项目自定义内容，再替换
@@ -81,7 +81,7 @@ Agent 读取项目规则与相关代码，查找已有任务，并使用任务�
 ```
 
 英文使用 `"en"`。文件或 `language` 缺失时无需配置，直接采用英文。
-可用示例：[英文](templates/en/config.json) · [简体中文](templates/zh-CN/config.json)。
+可用示例：[英文](src/templates/en/config.json) · [简体中文](src/templates/zh-CN/config.json)。
 已有配置时合并语言设置，不覆盖无关字段。
 
 该设置同时决定**新文档正文和新任务标识的语言**：
@@ -97,9 +97,9 @@ Agent 读取项目规则与相关代码，查找已有任务，并使用任务�
 不生成双份记录，不改写已安装的 Skill。聊天语言独立于此设置。
 
 包内默认 `README.md`、`SKILL.md` 和参考文件均为英文，并提供完整中文阅读文本。
-根目录 `SKILL.md` 保持唯一自动发现入口。此设置是 OpenSDLC 的指令约定，不意味着宿主
+源代码树中的 `src/SKILL.md` 保持唯一自动发现入口，安装后位于 Skill 根目录。此设置是 OpenSDLC 的指令约定，不意味着宿主
 原生识别 `.opensdlc/config.json`；由 Agent 在工作流中读取。
-完整规则及非法值、只读模式见[语言约定](references/artifacts.zh-CN.md#language)。
+完整规则及非法值、只读模式见[语言约定](src/references/artifacts.zh-CN.md#language)。
 
 <a id="workflow"></a>
 ## 工作流程
@@ -135,8 +135,8 @@ Agent 读取项目规则与相关代码，查找已有任务，并使用任务�
 | 原生 Agent 文档 | `AGENTS.md`／`CLAUDE.md` 上下文入口、新 `SKILL.md`、可复用子 Agent |
 | 产品与协作 | README、用户指南、API 参考、架构、PR 正文及权威来源入口 |
 
-从[完整模板目录](references/artifacts.zh-CN.md#templates)开始，或直接查看
-[英文任务模板](templates/en/task.md)／[中文任务模板](templates/zh-CN/task.md)。
+从[完整模板目录](src/references/artifacts.zh-CN.md#templates)开始，或直接查看
+[英文任务模板](src/templates/en/task.md)／[中文任务模板](src/templates/zh-CN/task.md)。
 `{{snake_case}}` 是写作提示，填写事实并删除无用提示。不需要安装模板渲染器。
 已有权威文档与仓库特定模板优先。
 
@@ -167,7 +167,7 @@ Agent 读取项目规则与相关代码，查找已有任务，并使用任务�
 └── incidents/<incident-id>.md
 ```
 
-意图、验证、任务审查与交接也各有固定拆分路径。[完整文档约定](references/artifacts.zh-CN.md)
+意图、验证、任务审查与交接也各有固定拆分路径。[完整文档约定](src/references/artifacts.zh-CN.md)
 将每类文档对应到模板与落点。按需创建目录，不预建空骨架。已有工单、PR、设计工具、CI 与
 事故系统可以继续作为权威来源，本地固定入口只链接，不复制正文。
 
@@ -245,24 +245,25 @@ Agent 读取项目规则与相关代码，查找已有任务，并使用任务�
 
 | 内容 | 英文 | 简体中文 |
 | --- | --- | --- |
-| 生命周期执行指令 | [SKILL.md](SKILL.md) | [SKILL.zh-CN.md](SKILL.zh-CN.md) |
-| 语言、模板与固定路径 | [Artifact conventions](references/artifacts.md) | [文档约定](references/artifacts.zh-CN.md) |
-| 自动化、评测、审查、发布与回流 | [Engineering operations](references/operations.md) | [工程实践](references/operations.zh-CN.md) |
+| 生命周期执行指令 | [SKILL.md](src/SKILL.md) | [SKILL.zh-CN.md](src/SKILL.zh-CN.md) |
+| 语言、模板与固定路径 | [Artifact conventions](src/references/artifacts.md) | [文档约定](src/references/artifacts.zh-CN.md) |
+| 自动化、评测、审查、发布与回流 | [Engineering operations](src/references/operations.md) | [工程实践](src/references/operations.zh-CN.md) |
 
 包的结构如下：
 
 ```text
-opensdlc/
+.
 ├── README.md
 ├── README.zh-CN.md
-├── SKILL.md                          # 唯一自动发现入口
-├── SKILL.zh-CN.md                     # 完整中文阅读文本
-├── references/
-│   ├── artifacts.md
-│   ├── artifacts.zh-CN.md
-│   ├── operations.md
-│   └── operations.zh-CN.md
-└── templates/
-    ├── en/                           # 默认文档模板与 config.json
-    └── zh-CN/                        # 对应中文模板与 config.json
+└── src/
+    ├── SKILL.md                       # 唯一自动发现入口
+    ├── SKILL.zh-CN.md                  # 完整中文阅读文本
+    ├── references/
+    │   ├── artifacts.md
+    │   ├── artifacts.zh-CN.md
+    │   ├── operations.md
+    │   └── operations.zh-CN.md
+    └── templates/
+        ├── en/                        # 默认文档模板与 config.json
+        └── zh-CN/                     # 对应中文模板与 config.json
 ```

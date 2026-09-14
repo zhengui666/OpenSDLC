@@ -25,7 +25,7 @@ Plan → Design → Build ⇄ Test → Deliver → Maintain
 
 ### Install the Skill
 
-Copy the complete `opensdlc/` directory into your agent's project-level skill directory. Keep the
+Copy the complete `src/` directory into your agent's project-level skill directory. Keep the
 references and both template libraries alongside `SKILL.md`. No runtime, generator, background service
 or new project dependency is required.
 
@@ -40,12 +40,12 @@ npx skills add https://github.com/zhengui666/OpenSDLC --skill opensdlc
 | [Claude Code](https://code.claude.com/docs/en/skills) | `.claude/skills/opensdlc/` | `/opensdlc` |
 | [Codex](https://developers.openai.com/codex/skills/) | `.agents/skills/opensdlc/` | `$opensdlc` |
 
-For a **new** Claude Code installation, run from the directory containing the unpacked `opensdlc/`:
+For a **new** Claude Code installation, run from the repository root containing `src/`:
 
 ```sh
 PROJECT="/absolute/path/to/your-project"
 mkdir -p "$PROJECT/.claude/skills"
-cp -R opensdlc "$PROJECT/.claude/skills/"
+cp -R src "$PROJECT/.claude/skills/opensdlc"
 ```
 
 For Codex, use `$PROJECT/.agents/skills/` instead. If the destination already exists, inspect and preserve
@@ -83,7 +83,7 @@ For Chinese documents and new task IDs, create or edit `.opensdlc/config.json` a
 ```
 
 Use `"en"` for English. When the file or `language` is absent, no configuration is needed: English applies.
-Ready-to-use examples: [English](templates/en/config.json) · [Simplified Chinese](templates/zh-CN/config.json).
+Ready-to-use examples: [English](src/templates/en/config.json) · [Simplified Chinese](src/templates/zh-CN/config.json).
 Merge the setting into an existing file rather than overwrite unrelated fields.
 
 The setting governs **new document prose and new task IDs**:
@@ -100,9 +100,10 @@ Existing documents keep their language unless translation is explicitly requeste
 are generated and the installed Skill is not rewritten. Chat language is independent.
 
 The package's default `README.md`, `SKILL.md` and references are English, with complete Chinese reading
-editions. Root `SKILL.md` remains the only discovery entry. This is an OpenSDLC instruction convention,
+editions. `src/SKILL.md` remains the only discovery entry in this source tree and is installed at the
+skill root. This is an OpenSDLC instruction convention,
 not a claim that the host natively reads `.opensdlc/config.json`. The agent reads it as part of the workflow.
-See [the exact language rules](references/artifacts.md#language), including unsupported values and read-only work.
+See [the exact language rules](src/references/artifacts.md#language), including unsupported values and read-only work.
 
 <a id="workflow"></a>
 ## Workflow
@@ -140,8 +141,8 @@ sections and prompts—not blank headings or prefilled success claims.
 | Native agent documents | `AGENTS.md` / `CLAUDE.md` context entry, new `SKILL.md`, reusable subagent |
 | Product and collaboration | README, user guide, API reference, architecture, PR body and canonical-source pointer |
 
-Start with [the template catalog](references/artifacts.md#templates), or open the default
-[English task template](templates/en/task.md) / [Chinese task template](templates/zh-CN/task.md).
+Start with [the template catalog](src/references/artifacts.md#templates), or open the default
+[English task template](src/templates/en/task.md) / [Chinese task template](src/templates/zh-CN/task.md).
 Use `{{snake_case}}` as writing prompts, replace them with facts, and remove unused prompts. There is no
 template renderer to install. Existing canonical documents and repository-specific templates take precedence.
 
@@ -174,7 +175,7 @@ reuse. Keep the stable entry linked to one authoritative body; do not create a s
 ```
 
 Intent, verification, task review and handoff also have specified split paths. The
-[full artifact contract](references/artifacts.md) maps every document to its template and destination.
+[full artifact contract](src/references/artifacts.md) maps every document to its template and destination.
 Folders are created on demand, not as empty scaffolding. Existing Issues, PRs, design tools, CI and incident
 systems can remain authoritative; fixed local entries link them rather than copy their content.
 
@@ -255,24 +256,25 @@ reviews and unfinished deployment/observation cannot be reported as successful.
 
 | Need | English | Simplified Chinese |
 | --- | --- | --- |
-| Lifecycle instructions | [SKILL.md](SKILL.md) | [SKILL.zh-CN.md](SKILL.zh-CN.md) |
-| Language, templates and fixed artifact paths | [Artifact conventions](references/artifacts.md) | [文档约定](references/artifacts.zh-CN.md) |
-| Automation, evaluations, review, release and feedback | [Engineering operations](references/operations.md) | [工程实践](references/operations.zh-CN.md) |
+| Lifecycle instructions | [SKILL.md](src/SKILL.md) | [SKILL.zh-CN.md](src/SKILL.zh-CN.md) |
+| Language, templates and fixed artifact paths | [Artifact conventions](src/references/artifacts.md) | [文档约定](src/references/artifacts.zh-CN.md) |
+| Automation, evaluations, review, release and feedback | [Engineering operations](src/references/operations.md) | [工程实践](src/references/operations.zh-CN.md) |
 
 The package is organized as:
 
 ```text
-opensdlc/
+.
 ├── README.md
 ├── README.zh-CN.md
-├── SKILL.md                          # The only discovery entry
-├── SKILL.zh-CN.md                     # Complete Chinese reading edition
-├── references/
-│   ├── artifacts.md
-│   ├── artifacts.zh-CN.md
-│   ├── operations.md
-│   └── operations.zh-CN.md
-└── templates/
-    ├── en/                           # Default document starters + config.json
-    └── zh-CN/                        # Matching Chinese starters + config.json
+└── src/
+    ├── SKILL.md                       # The only discovery entry
+    ├── SKILL.zh-CN.md                  # Complete Chinese reading edition
+    ├── references/
+    │   ├── artifacts.md
+    │   ├── artifacts.zh-CN.md
+    │   ├── operations.md
+    │   └── operations.zh-CN.md
+    └── templates/
+        ├── en/                        # Default document starters + config.json
+        └── zh-CN/                     # Matching Chinese starters + config.json
 ```
