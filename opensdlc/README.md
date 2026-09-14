@@ -29,6 +29,12 @@ Copy the complete `opensdlc/` directory into your agent's project-level skill di
 references and both template libraries alongside `SKILL.md`. No runtime, generator, background service
 or new project dependency is required.
 
+The [skills.sh](https://skills.sh) CLI can install it directly into the detected agent's skill directory:
+
+```sh
+npx skills add https://github.com/zhengui666/OpenSDLC --skill opensdlc
+```
+
 | Agent | Project installation | Explicit invocation |
 | --- | --- | --- |
 | [Claude Code](https://code.claude.com/docs/en/skills) | `.claude/skills/opensdlc/` | `/opensdlc` |

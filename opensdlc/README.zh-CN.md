@@ -28,6 +28,12 @@ OpenSDLC 是一个纯指令型 Agent Skill。它使用项目已有工具，连�
 将完整 `opensdlc/` 目录复制到 Agent 的项目级 Skill 目录，保留 `SKILL.md`、参考文件和
 两套模板的相对位置。不需要安装运行时、生成器、后台服务或新项目依赖。
 
+也可以使用 [skills.sh](https://skills.sh) CLI，将它直接安装到自动检测到的 Agent Skill 目录：
+
+```sh
+npx skills add https://github.com/zhengui666/OpenSDLC --skill opensdlc
+```
+
 | Agent | 项目级安装目录 | 显式调用 |
 | --- | --- | --- |
 | [Claude Code](https://code.claude.com/docs/en/skills) | `.claude/skills/opensdlc/` | `/opensdlc` |
