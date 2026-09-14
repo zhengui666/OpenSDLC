@@ -1,7 +1,5 @@
 # Artifact conventions
 
-English · [简体中文](artifacts.zh-CN.md)
-
 Keep workflow documents at the repository root under `.opensdlc/`, with fixed locations, one authoritative
 body per subject and files created only when needed. The [core workflow](../SKILL.md) defines the work;
 this document defines language, templates and destinations, not a requirement to fill every file.
@@ -86,10 +84,10 @@ identifiers, anchors, API fields, commands and quoted evidence remain unchanged.
 is updated at its source, not hand-translated. Switching language neither bulk-translates existing content
 nor renames existing tasks.
 
-The package itself offers English `README.md`, `SKILL.md` and references, with complete `.zh-CN.md` reading
-editions. Only root `SKILL.md` is a discovery entry. Project configuration selects writing templates and
-which reference edition to read; it does not change the host UI or replace the installed `SKILL.md`.
-Both template libraries stay in the Skill package; generated project documents use one language each.
+The source repository keeps bilingual README files at its root. The installed Skill contains the English
+`SKILL.md`, references and both template libraries; `templates/zh-CN/` holds the Chinese starters. Only
+root `SKILL.md` is a discovery entry. Project configuration selects writing templates; it does not change
+the host UI or replace the installed `SKILL.md`. Generated project documents use one language each.
 
 <a id="layout"></a>
 ## Layout

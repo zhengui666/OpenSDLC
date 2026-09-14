@@ -14,8 +14,6 @@ description: >-
 
 **Make every change understandable, verifiable and transferable—from intent to operational feedback.**
 
-[English](SKILL.md) · [简体中文](SKILL.zh-CN.md)
-
 <a id="language"></a>
 ## Language and templates
 
@@ -26,9 +24,7 @@ Read it again when it changes before creating another document. Do not infer it 
 
 Use `templates/en/` by default or `templates/zh-CN/` when configured. Read the matching template
 before creating a document; the [artifact and template catalog](references/artifacts.md#templates)
-maps each one to its fixed destination. For Chinese, use [the Chinese catalog](references/artifacts.zh-CN.md#templates)
-and [operations reference](references/operations.zh-CN.md) as needed; the complete translated
-instruction text is [SKILL.zh-CN.md](SKILL.zh-CN.md). This English `SKILL.md` remains the sole discovery entry.
+maps each one to its fixed destination. This English `SKILL.md` remains the sole discovery entry.
 
 The resolved language governs new document prose and **new task IDs**. With `language: "zh-CN"`,
 a new `<task-id>` MUST use a Simplified Chinese task name, such as `修复登录超时`; with `en` or the

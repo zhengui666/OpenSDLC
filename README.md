@@ -99,10 +99,10 @@ syntax stay unchanged. Existing tasks retain their IDs and paths even when the s
 Existing documents keep their language unless translation is explicitly requested; no parallel copies
 are generated and the installed Skill is not rewritten. Chat language is independent.
 
-The package's default `README.md`, `SKILL.md` and references are English, with complete Chinese reading
-editions. `src/SKILL.md` remains the only discovery entry in this source tree and is installed at the
-skill root. This is an OpenSDLC instruction convention,
-not a claim that the host natively reads `.opensdlc/config.json`. The agent reads it as part of the workflow.
+The repository keeps bilingual README files at its root. `src/SKILL.md` and `src/references/` are English;
+`src/templates/zh-CN/` provides the Chinese starters. `src/SKILL.md` is the only discovery entry in this
+source tree and is installed at the skill root. This is an OpenSDLC instruction convention, not a claim
+that the host natively reads `.opensdlc/config.json`. The agent reads it as part of the workflow.
 See [the exact language rules](src/references/artifacts.md#language), including unsupported values and read-only work.
 
 <a id="workflow"></a>
@@ -254,11 +254,12 @@ reviews and unfinished deployment/observation cannot be reported as successful.
 <a id="docs"></a>
 ## Documentation
 
-| Need | English | Simplified Chinese |
-| --- | --- | --- |
-| Lifecycle instructions | [SKILL.md](src/SKILL.md) | [SKILL.zh-CN.md](src/SKILL.zh-CN.md) |
-| Language, templates and fixed artifact paths | [Artifact conventions](src/references/artifacts.md) | [文档约定](src/references/artifacts.zh-CN.md) |
-| Automation, evaluations, review, release and feedback | [Engineering operations](src/references/operations.md) | [工程实践](src/references/operations.zh-CN.md) |
+| Need | Location |
+| --- | --- |
+| Lifecycle instructions | [src/SKILL.md](src/SKILL.md) |
+| Language, templates and fixed artifact paths | [src/references/artifacts.md](src/references/artifacts.md) |
+| Automation, evaluations, review, release and feedback | [src/references/operations.md](src/references/operations.md) |
+| Simplified Chinese README | [README.zh-CN.md](README.zh-CN.md) |
 
 The package is organized as:
 
@@ -268,12 +269,9 @@ The package is organized as:
 ├── README.zh-CN.md
 └── src/
     ├── SKILL.md                       # The only discovery entry
-    ├── SKILL.zh-CN.md                  # Complete Chinese reading edition
     ├── references/
     │   ├── artifacts.md
-    │   ├── artifacts.zh-CN.md
-    │   ├── operations.md
-    │   └── operations.zh-CN.md
+    │   └── operations.md
     └── templates/
         ├── en/                        # Default document starters + config.json
         └── zh-CN/                     # Matching Chinese starters + config.json

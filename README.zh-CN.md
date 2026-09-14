@@ -96,10 +96,10 @@ Agent 读取项目规则与相关代码，查找已有任务，并使用任务�
 已有任务在配置切换后保留原标识和路径；已有文档保持其语言，除非明确要求翻译。
 不生成双份记录，不改写已安装的 Skill。聊天语言独立于此设置。
 
-包内默认 `README.md`、`SKILL.md` 和参考文件均为英文，并提供完整中文阅读文本。
-源代码树中的 `src/SKILL.md` 保持唯一自动发现入口，安装后位于 Skill 根目录。此设置是 OpenSDLC 的指令约定，不意味着宿主
-原生识别 `.opensdlc/config.json`；由 Agent 在工作流中读取。
-完整规则及非法值、只读模式见[语言约定](src/references/artifacts.zh-CN.md#language)。
+仓库根目录保留中英文 README。`src/SKILL.md` 与 `src/references/` 使用英文，
+`src/templates/zh-CN/` 提供中文模板。`src/SKILL.md` 是源代码树中唯一的自动发现入口，安装后位于
+Skill 根目录。此设置是 OpenSDLC 的指令约定，不意味着宿主原生识别 `.opensdlc/config.json`；
+由 Agent 在工作流中读取。完整规则及非法值、只读模式见[语言约定](src/references/artifacts.md#language)。
 
 <a id="workflow"></a>
 ## 工作流程
@@ -135,7 +135,7 @@ Agent 读取项目规则与相关代码，查找已有任务，并使用任务�
 | 原生 Agent 文档 | `AGENTS.md`／`CLAUDE.md` 上下文入口、新 `SKILL.md`、可复用子 Agent |
 | 产品与协作 | README、用户指南、API 参考、架构、PR 正文及权威来源入口 |
 
-从[完整模板目录](src/references/artifacts.zh-CN.md#templates)开始，或直接查看
+从[完整模板目录](src/references/artifacts.md#templates)开始，或直接查看
 [英文任务模板](src/templates/en/task.md)／[中文任务模板](src/templates/zh-CN/task.md)。
 `{{snake_case}}` 是写作提示，填写事实并删除无用提示。不需要安装模板渲染器。
 已有权威文档与仓库特定模板优先。
@@ -167,7 +167,7 @@ Agent 读取项目规则与相关代码，查找已有任务，并使用任务�
 └── incidents/<incident-id>.md
 ```
 
-意图、验证、任务审查与交接也各有固定拆分路径。[完整文档约定](src/references/artifacts.zh-CN.md)
+意图、验证、任务审查与交接也各有固定拆分路径。[完整文档约定](src/references/artifacts.md)
 将每类文档对应到模板与落点。按需创建目录，不预建空骨架。已有工单、PR、设计工具、CI 与
 事故系统可以继续作为权威来源，本地固定入口只链接，不复制正文。
 
@@ -243,11 +243,12 @@ Agent 读取项目规则与相关代码，查找已有任务，并使用任务�
 <a id="docs"></a>
 ## 文档导航
 
-| 内容 | 英文 | 简体中文 |
-| --- | --- | --- |
-| 生命周期执行指令 | [SKILL.md](src/SKILL.md) | [SKILL.zh-CN.md](src/SKILL.zh-CN.md) |
-| 语言、模板与固定路径 | [Artifact conventions](src/references/artifacts.md) | [文档约定](src/references/artifacts.zh-CN.md) |
-| 自动化、评测、审查、发布与回流 | [Engineering operations](src/references/operations.md) | [工程实践](src/references/operations.zh-CN.md) |
+| 内容 | 路径 |
+| --- | --- |
+| 生命周期执行指令 | [src/SKILL.md](src/SKILL.md) |
+| 语言、模板与固定路径 | [src/references/artifacts.md](src/references/artifacts.md) |
+| 自动化、评测、审查、发布与回流 | [src/references/operations.md](src/references/operations.md) |
+| English README | [README.md](README.md) |
 
 包的结构如下：
 
@@ -257,12 +258,9 @@ Agent 读取项目规则与相关代码，查找已有任务，并使用任务�
 ├── README.zh-CN.md
 └── src/
     ├── SKILL.md                       # 唯一自动发现入口
-    ├── SKILL.zh-CN.md                  # 完整中文阅读文本
     ├── references/
     │   ├── artifacts.md
-    │   ├── artifacts.zh-CN.md
-    │   ├── operations.md
-    │   └── operations.zh-CN.md
+    │   └── operations.md
     └── templates/
         ├── en/                        # 默认文档模板与 config.json
         └── zh-CN/                     # 对应中文模板与 config.json

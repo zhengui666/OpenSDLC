@@ -1,7 +1,5 @@
 # Engineering operations
 
-English · [简体中文](operations.zh-CN.md)
-
 Read this for project onboarding, automation, evaluations, releases or maintenance. The
 [core workflow](../SKILL.md) defines execution; [artifact conventions](artifacts.md) define every output.
 `T` denotes `.opensdlc/tasks/<task-id>`. Read repository `.opensdlc/config.json` and the matching template
@@ -111,7 +109,7 @@ assume one comment command both reviews and edits code. An automated author subm
 approves. Automated handling of comments does not grant self-approval. Continuous self-testing,
 fresh-context acceptance and PR review are not interchangeable results.
 
-For the PR body, use the existing repository template, or the bilingual `pull-request.md` starter when
+For the PR body, use the existing repository template, or the `pull-request.md` starter when
 none exists. Put the result on the hosting platform and link it from the task; do not save another `pr.md`.
 
 <a id="operations"></a>
