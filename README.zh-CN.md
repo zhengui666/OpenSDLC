@@ -6,7 +6,7 @@
 
 [开始使用](#quickstart) · [语言设置](#language) · [工作流程](#workflow) · [模板](#templates) · [示例](#examples) · [文档导航](#docs)
 
-OpenSDLC 是一个纯指令型 Agent Skill。它使用项目已有工具，连接需求、设计、实现、测试、
+OpenSDLC 是一个以指令为主的 Agent Skill。它使用项目已有工具，连接需求、设计、实现、测试、
 审查、发布与维护。工作记录放在仓库的 `.opensdlc/` 固定位置，下一位开发者或 Agent
 不依赖完整聊天记录也能理解和接手。
 
@@ -26,7 +26,8 @@ OpenSDLC 是一个纯指令型 Agent Skill。它使用项目已有工具，连�
 ### 安装 Skill
 
 将完整 `src/` 目录复制到 Agent 的项目级 Skill 目录，保留 `SKILL.md`、参考文件和
-两套模板的相对位置。不需要安装运行时、生成器、后台服务或新项目依赖。
+两套模板的相对位置。核心工作流不需要安装运行时、生成器、后台服务或新项目依赖。
+可选的看板规划辅助脚本使用宿主现有 Python 3 标准库。
 
 也可以使用 [skills.sh](https://skills.sh) CLI，将它直接安装到自动检测到的 Agent Skill 目录：
 
@@ -260,8 +261,24 @@ Skill 根目录。此设置是 OpenSDLC 的指令约定，不意味着宿主原�
     ├── SKILL.md                       # 唯一自动发现入口
     ├── references/
     │   ├── artifacts.md
-    │   └── operations.md
+    │   ├── operations.md
+    │   └── board-sync.md
+    ├── scripts/board_sync.py          # 可选的纯同步规划辅助脚本
     └── templates/
         ├── en/                        # 默认文档模板与 config.json
         └── zh-CN/                     # 对应中文模板与 config.json
 ```
+
+
+## 可选的项目看板同步
+
+为指定目的地启用后，OpenSDLC 要求执行代理在接单、拆分、阶段变化、进展、阻塞、暂停、恢复和
+交付等真实工作事件后，同步项目、任务及递归子任务。同步保留稳定 ID、用户手动字段锁与删除墓碑，
+使用当前 revision 的字段级差量更新。生命周期阶段与待办、进行中、阻塞、暂停、完成状态分开表达。
+
+[集成合同与验证方法](src/references/board-sync.md) 说明现有 MCP 连接器、可选的宿主 HTTP 适配及
+仅使用 Python 标准库的可选规划辅助脚本。默认工作流仍无需运行时或新依赖；不内置凭据、私人看板
+地址或后台服务。仅安装 Skill 不代表已经接通；连接不可用时应明确报告“未同步”，并验证真实任务事件
+确实到达目的地。
+
+本地合同测试：`python3 -m unittest discover -s tests -v`。通过测试不代表线上连接或宿主触发已验证。
