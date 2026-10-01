@@ -68,6 +68,20 @@ Apply each activity at its trigger: onboarding, individual changes and ongoing o
 cadences. Reuse working capabilities. Required evaluation or monitoring that is not available remains
 unfinished work, not an inapplicable step; do not rebuild infrastructure for every small change.
 
+## Optional connected task board
+
+When synchronization to a specific board has been enabled by the user, read
+[board synchronization](references/board-sync.md) at start/resume. After accepting a task, decomposing
+work, changing lifecycle stage, making meaningful progress, encountering a blocker, pausing, resuming
+or delivering, synchronize the current verified facts through the existing board connector before
+reporting the event. The coordinator also does this after integrating subagent results.
+
+Keep project → task → recursive subtask relationships and stable IDs. Stage and execution status are
+separate; retain manual field locks and deletion tombstones. Use current revision CAS and field-level
+deltas, never replace the board or revive deleted tasks. Missing access or a rejected write means not
+synchronized, not successful. Continue independent work and disclose the gap. This optional projection
+uses existing host tools; it does not install a background service or grant new permissions.
+
 ## Document locations
 
 All `.opensdlc/` paths are relative to the **repository being developed**, not the Skill directory.
@@ -324,3 +338,4 @@ monitoring; simplifying the mechanism must not remove a necessary capability.
 
 Read [artifact rules](references/artifacts.md) when writing or resuming documents and
 [operations](references/operations.md) for onboarding, automation, evaluations, releases or maintenance.
+

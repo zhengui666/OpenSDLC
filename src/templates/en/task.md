@@ -14,6 +14,8 @@ Replace placeholders with facts. Omit unused prompts, never required behavior. A
 
 **Agreed endpoint and merge / release scope:** {{endpoint}}
 
+<!-- Optional, only when board sync is enabled: retain the stable board ID, project ID and parent board ID here or link the existing mapping. Do not derive identity from title, rename mapped IDs, store credentials or duplicate task content. -->
+
 <a id="intent"></a>
 ## Intent
 
@@ -80,3 +82,4 @@ Replace placeholders with facts. Omit unused prompts, never required behavior. A
 **External actions to reconcile before retrying:** {{external_state}}
 
 **Next action, resume commands and needed access:** {{resume}}
+

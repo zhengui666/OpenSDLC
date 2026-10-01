@@ -6,7 +6,7 @@ English · [简体中文](README.zh-CN.md)
 
 [Quickstart](#quickstart) · [Language](#language) · [Workflow](#workflow) · [Templates](#templates) · [Examples](#examples) · [Documentation](#docs)
 
-OpenSDLC is an instruction-only Agent Skill. It connects requirements, design, implementation, testing,
+OpenSDLC is an instruction-first Agent Skill. It connects requirements, design, implementation, testing,
 review, release and maintenance using the tools your project already has. Work stays understandable to
 the next developer or agent through stable records in the repository's `.opensdlc/` directory.
 
@@ -27,7 +27,8 @@ Plan → Design → Build ⇄ Test → Deliver → Maintain
 
 Copy the complete `src/` directory into your agent's project-level skill directory. Keep the
 references and both template libraries alongside `SKILL.md`. No runtime, generator, background service
-or new project dependency is required.
+or new project dependency is required for the core workflow. The optional board planner uses Python 3
+from the host standard library.
 
 The [skills.sh](https://skills.sh) CLI can install it directly into the detected agent's skill directory:
 
@@ -225,7 +226,8 @@ If execution is unavailable, report the gap; product unit tests do not replace a
 
 ### Is this a new development platform?
 
-No. OpenSDLC is Markdown instructions, references, templates and small JSON language examples. It reuses
+No. OpenSDLC primarily provides Markdown instructions, references, templates and small JSON language examples.
+An optional standard-library helper plans connected-board updates; it does not host the board. It reuses
 Git, Issue/PR platforms, tests, CI, permissions, deployments and monitoring. It does not install a service,
 provide external access or introduce a policy engine.
 
@@ -271,8 +273,26 @@ The package is organized as:
     ├── SKILL.md                       # The only discovery entry
     ├── references/
     │   ├── artifacts.md
-    │   └── operations.md
+    │   ├── operations.md
+    │   └── board-sync.md
+    ├── scripts/board_sync.py          # Optional pure synchronization planner
     └── templates/
         ├── en/                        # Default document starters + config.json
         └── zh-CN/                     # Matching Chinese starters + config.json
 ```
+
+
+## Optional connected task board
+
+When enabled for a specific destination, OpenSDLC asks the executing agent to synchronize project, task
+and recursive subtask progress at actual workflow events. It preserves stable IDs, manual field locks
+and deletion tombstones with revision-aware, field-level updates. Lifecycle stage remains distinct from
+pending/in-progress/blocked/paused/done execution state.
+
+[Integration contract and verification](src/references/board-sync.md) covers existing MCP connectors,
+an optional host HTTP adapter and a dependency-free planning helper. No credentials or private board
+address are bundled. An installed Skill alone does not start a background service; without a working
+connection, progress is **not synchronized**. Verify a real task event reaches the destination.
+
+Run local contract tests with `python3 -m unittest discover -s tests -v`. These tests do not establish
+live access or host-trigger execution.

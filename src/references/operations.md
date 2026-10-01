@@ -174,3 +174,13 @@ configuration precedence, managed settings, permissions, sandboxing, hooks, skil
 managed MCP, model/network access, monitoring and activity auditing. Start at [native integration points](artifacts.md#native).
 Record what the project uses and test allowed/denied actions, rather than copying sample settings without
 validating the target environment. Preserve native executable configuration syntax in both prose languages.
+
+
+## Connected task-board events
+
+For user-enabled task-board synchronization, follow [the board contract](board-sync.md) at actual
+acceptance, decomposition, stage/progress, blocked, paused, resumed and delivery events. The coordinator
+reads the current authoritative state and synchronizes through the existing host connector. Record the
+verified provider and stable project ID at `.opensdlc/project.md#native`; never store credentials there.
+This is an optional projection, not an approval ledger. Verify a real event reaches the destination;
+unit tests or installed Skill files alone do not establish live or unattended synchronization.
